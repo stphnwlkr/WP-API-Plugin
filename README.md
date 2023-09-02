@@ -1,2 +1,2 @@
 # API Element
- A Bricks Element to Create a post loop based on the WP API
+ A shortcode that pulls articles using the WP API.
