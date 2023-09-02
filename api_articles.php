@@ -39,6 +39,11 @@ function api_articles_shortcode($atts) {
     if (is_wp_error($response)) {
         return 'Error: ' . $response->get_error_message();
     }
+    $response_code = wp_remote_retrieve_response_code($response);
+
+    if ($response_code != 200) {
+        return 'There is a problem and we are now working on it. HTTP Response Code: ' . $response_code;
+    }
 
     $posts = wp_remote_retrieve_body($response);
     $posts = json_decode($posts, true);
