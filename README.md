@@ -8,7 +8,8 @@
 - Set the number of articles - default is 6
 - Set an offset (start at article 5) - default is 0
 - Set the heading level (h2-h4) - default is h2
-- Choose a category (requires cat ID) - default is none
+- Set the date format - default is Month Day, Year (F d, Y)
+- Choose a category (requires cat ID) - Default is none.
 - Choose a post type (requires post type slug) - default is post
 - Whether to show category, excerpt, or date - all are visible by default
 
