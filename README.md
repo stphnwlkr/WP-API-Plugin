@@ -1,4 +1,4 @@
-[!image](https://awb4wp.com/wp-content/uploads/2023/09/grid-post-layout-scaled.jpg)
+![image](https://awb4wp.com/wp-content/uploads/2023/09/grid-post-layout-scaled.jpg)
 
 # API Element
  A shortcode that pulls articles using the WP API. Sample CSS is provided. The CSS needs to be reworked to combine both layouts in a single API request.
