@@ -5,6 +5,9 @@
 
 ## Version 1.3 
 Restructured the html layout to prvide the correct DOM order for accessibility. Add a dynamic modifier so that the base layout is the same but can easily be changed. Also added the ability to not show an image in the event you want just a list of links.
+
+## Version 1.4
+Added human readable time difference option (e.g., Published 3 days ago)
  ## Parameter
 
 * endpoint: Set the source (required)

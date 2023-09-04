@@ -2,7 +2,7 @@
 /*
 Plugin Name: WP API Articles
 Description: Retrieves the latest articles from a specified WordPress API endpoint.
-Version: 1.3
+Version: 1.4
 Author: Stephen Walker
 */
 
@@ -26,6 +26,7 @@ function api_articles_shortcode($atts) {
         'heading_level' => 'h2',
         'show_img' => 'yes',
         'article_class' => '',
+		'date_format_type' => 'human',
     ), $atts);
 
     $args = array_map('sanitize_text_field', $args);
@@ -65,16 +66,22 @@ function api_articles_shortcode($atts) {
     // Generate the appropriate HTML tag for the heading
     $heading = $args['heading_level'];
 
-    $output = '<ul class="api-articles">';
+    $output = '<ul class="api-articles ' . esc_attr($args['article_class']) .'">';
 
     foreach ($posts as $post) {
         $featured_image = isset($post['_embedded']['wp:featuredmedia'][0]['source_url']) ? $post['_embedded']['wp:featuredmedia'][0]['source_url'] : '';
         $date_format = $args['format_date'];
-        $date_published = date($date_format, strtotime($post['date']));
+		
+        if ($args['date_format_type'] === 'human') {
+            $date_published = 'Published ' . human_time_diff(strtotime($post['date']), current_time('timestamp')) . ' ago';
+        } else {
+            $date_published = date($date_format, strtotime($post['date']));
+        }
+		
         $category = isset($post['_embedded']['wp:term'][0][0]['name']) ? $post['_embedded']['wp:term'][0][0]['name'] : '';
 
         $output .= '<li class="api-article">';
-        $output .= '<article class="news-card ' . esc_attr($args['article_class']) . '">';
+        $output .= '<article class="news-card">';
         $output .= '<div class="news-card__content-wrapper">';
         $output .= "<$heading class='news-card__title'><a href='" . esc_url($post['link']) . "' class='news-card__link'>" . esc_html($post['title']['rendered']) . "</a></$heading>";
         $output .= '<div class="news-card__meta-wrapper">';
