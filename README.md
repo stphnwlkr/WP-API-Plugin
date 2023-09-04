@@ -6,6 +6,7 @@
 ## Version 1.3 
 Restructured the html layout to prvide the correct DOM order for accessibility. Add a dynamic modifier so that the base layout is the same but can easily be changed. Also added the ability to not show an image in the event you want just a list of links.
  ## Parameter
+
 - endpoint: Set the source (required)
 - count: Set the number of articles - default is 6
 - offset: Set an offset (start at article 5) - default is 0
@@ -19,7 +20,11 @@ Restructured the html layout to prvide the correct DOM order for accessibility. 
     __ show_img
 - article_class: Add layout modifier - default is none
 
+
 ## Shortcode
 
 - [api_articles endpoint="https://example.com" count="5" show_excerpt="yes" show_date="yes" category="2" heading_level="h2"] 
 - echo do_shortcode('[api_articles endpoint="https://example.com" count="5" show_excerpt="yes" show_date="yes"]');
+
+# Disclaimer
+This code is provided as is. Every attempt has been made to provide good code, but there is no expressed warranty or guarantee. Test the code prior to using it on a production site.
