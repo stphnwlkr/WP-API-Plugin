@@ -7,18 +7,18 @@
 Restructured the html layout to prvide the correct DOM order for accessibility. Add a dynamic modifier so that the base layout is the same but can easily be changed. Also added the ability to not show an image in the event you want just a list of links.
  ## Parameter
 
-- endpoint: Set the source (required)
-- count: Set the number of articles - default is 6
-- offset: Set an offset (start at article 5) - default is 0
-- heading_level: Set the heading level (h2-h4) - default is h2
-- category: Choose a category (requires cat ID) - default is none
-- post_type: Choose a post type (requires post type slug) - default is post
-- Whether to show image, category, excerpt, or date - all are visible by default
-    -- show_category
-    -- show_excerpt
-    -- show_date
-    __ show_img
-- article_class: Add layout modifier - default is none
+* endpoint: Set the source (required)
+* count: Set the number of articles - default is 6
+* offset: Set an offset (start at article 5) - default is 0
+* heading_level: Set the heading level (h2-h4) - default is h2
+* category: Choose a category (requires cat ID) - default is none
+* post_type: Choose a post type (requires post type slug) - default is post
+* Whether to show image, category, excerpt, or date - all are visible by default*   
+    - show_category
+    - show_excerpt
+    - show_date
+    - show_img
+* article_class: Add layout modifier - default is none
 
 
 ## Shortcode
