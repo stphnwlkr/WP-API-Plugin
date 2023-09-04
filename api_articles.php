@@ -24,11 +24,14 @@ function api_articles_shortcode($atts) {
         'show_category' => 'yes',
         'category' => '',
         'heading_level' => 'h2',
+        'show_img' => 'yes',
+        'article_class' => '',
     ), $atts);
 
     $args = array_map('sanitize_text_field', $args);
     $args['count'] = absint($args['count']);
     $args['offset'] = absint($args['offset']);
+    $args['article_class'] = sanitize_html_class($args['article_class']);
 
     if (empty($args['endpoint'])) {
         return 'Error: Please specify the API endpoint.';
@@ -71,10 +74,7 @@ function api_articles_shortcode($atts) {
         $category = isset($post['_embedded']['wp:term'][0][0]['name']) ? $post['_embedded']['wp:term'][0][0]['name'] : '';
 
         $output .= '<li class="api-article">';
-        $output .= '<article class="news-card">';
-        $output .= '<figure class="news-card__img-wrapper">';
-        $output .= "<img src='" . esc_url($featured_image) . "' alt='' class='news-card__img'>";
-        $output .= '</figure>';
+        $output .= '<article class="news-card ' . esc_attr($args['article_class']) . '">';
         $output .= '<div class="news-card__content-wrapper">';
         $output .= "<$heading class='news-card__title'><a href='" . esc_url($post['link']) . "' class='news-card__link'>" . esc_html($post['title']['rendered']) . "</a></$heading>";
         $output .= '<div class="news-card__meta-wrapper">';
@@ -89,6 +89,11 @@ function api_articles_shortcode($atts) {
             $output .= "<p class='news-card__excerpt'>" . wp_kses_post($post['excerpt']['rendered']) . "</p>";
         }
         $output .= '</div>';
+        if ($args['show_img'] == 'yes') {
+        $output .= '<figure class="news-card__img-wrapper">';
+        $output .= "<img src='" . esc_url($featured_image) . "' alt='' class='news-card__img'>";
+        $output .= '</figure>';
+        }
         $output .= '</article>';
         $output .= '</li>';
     }
