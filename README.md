@@ -42,12 +42,11 @@ Add option to receive a single post by slug
 
 ## Shortcode
 
-- [api_articles endpoint="https://example.com" count="5" show_excerpt="yes" show_date="yes" category="2" heading_level="h2"] 
-- echo do_shortcode('[api_articles endpoint="https://example.com" count="5" show_excerpt="yes" show_date="yes"]');
+* [api_articles endpoint="https://example.com" count="5" show_excerpt="yes" show_date="yes" category="2" heading_level="h2"] 
+* echo do_shortcode('[api_articles endpoint="https://example.com" count="5" show_excerpt="yes" show_date="yes"]');
 
 ### Category List
-[fetch_categories endpoint="https://your-wordpress-site.com"]
-=======
+* [fetch_categories endpoint="https://your-wordpress-site.com"]
 # Note
 If you are on WordPress VIP, they have some modified functions, and you will want to refer to https://github.com/stphnwlkr/WP-API-For-VIP.
 
