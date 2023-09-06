@@ -27,6 +27,7 @@ function api_articles_shortcode($atts) {
         'show_img' => 'yes',
         'article_class' => '',
 		'date_format_type' => 'human',
+        'post_slug' => '',
     ), $atts);
 
     $args = array_map('sanitize_text_field', $args);
@@ -43,7 +44,11 @@ function api_articles_shortcode($atts) {
         $category_query = "&categories={$args['category']}";
     }
 
-    $response = wp_remote_get("{$args['endpoint']}/wp-json/wp/v2/posts?_embed&per_page={$args['count']}&post_type={$args['post_type']}&offset={$args['offset']}{$category_query}");
+    if (!empty($args['post_slug'])) {
+        $response = wp_remote_get("{$args['endpoint']}/wp-json/wp/v2/posts?_embed&slug={$args['post_slug']}");
+    } else {
+        $response = wp_remote_get("{$args['endpoint']}/wp-json/wp/v2/posts?_embed&per_page={$args['count']}&post_type={$args['post_type']}&offset={$args['offset']}{$category_query}");
+    }
 
     if (is_wp_error($response)) {
         error_log($response->get_error_message());

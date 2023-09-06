@@ -8,6 +8,9 @@ Restructured the html layout to prvide the correct DOM order for accessibility. 
 
 ## Version 1.4
 Added human readable time difference option (e.g., Published 3 days ago)
+
+## Version 1.5
+Add option to receive a single post by slug
  ## Parameter
 
 * endpoint: Set the source (required)
