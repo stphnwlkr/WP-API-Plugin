@@ -47,6 +47,10 @@ Add option to receive a single post by slug
 
 ### Category List
 [fetch_categories endpoint="https://your-wordpress-site.com"]
+=======
+# Note
+If you are on WordPress VIP, they have some modified functions, and you will want to refer to https://github.com/stphnwlkr/WP-API-For-VIP.
+
 
 # Disclaimer
 This code is provided as is. Every attempt has been made to provide good code, but there is no expressed warranty or guarantee. Test the code prior to using it on a production site.
