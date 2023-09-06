@@ -2,7 +2,7 @@
 /*
 Plugin Name: WP API Articles
 Description: Retrieves the latest articles from a specified WordPress API endpoint.
-Version: 1.4
+Version: 1.5.1
 Author: Stephen Walker
 */
 
@@ -23,11 +23,14 @@ function api_articles_shortcode($atts) {
         'show_date' => 'yes',
         'show_category' => 'yes',
         'category' => '',
+        'tag' => '',
         'heading_level' => 'h2',
         'show_img' => 'yes',
         'article_class' => '',
 		'date_format_type' => 'human',
         'post_slug' => '',
+        'link_target' => '',  // e.g. '_blank' for a new tab
+        'link_aria_label' => '',
     ), $atts);
 
     $args = array_map('sanitize_text_field', $args);
@@ -43,11 +46,15 @@ function api_articles_shortcode($atts) {
     if (!empty($args['category'])) {
         $category_query = "&categories={$args['category']}";
     }
+    $tag_query = '';
+    if (!empty($args['tag'])) {
+        $tag_query = "&tags={$args['tag']}";
+    }
 
     if (!empty($args['post_slug'])) {
-        $response = wp_remote_get("{$args['endpoint']}/wp-json/wp/v2/posts?_embed&slug={$args['post_slug']}");
+        $response = vip_safe_wp_remote_get("{$args['endpoint']}/wp-json/wp/v2/{$args['post_type']}?_embed&slug={$args['post_slug']}");
     } else {
-        $response = wp_remote_get("{$args['endpoint']}/wp-json/wp/v2/posts?_embed&per_page={$args['count']}&post_type={$args['post_type']}&offset={$args['offset']}{$category_query}");
+        $response = vip_safe_wp_remote_get("{$args['endpoint']}/wp-json/wp/v2/{$args['post_type']}?_embed&per_page={$args['count']}&offset={$args['offset']}{$category_query}{$tag_query}");
     }
 
     if (is_wp_error($response)) {
@@ -74,6 +81,8 @@ function api_articles_shortcode($atts) {
     $output = '<ul class="api-articles ' . esc_attr($args['article_class']) .'">';
 
     foreach ($posts as $post) {
+        $link_target = !empty($args['link_target']) ? " target='" . esc_attr($args['link_target']) . "'" : "";
+        $link_aria_label = !empty($args['link_aria_label']) ? " aria-label='" . esc_attr($args['link_aria_label']) . "'" : "";
         $featured_image = isset($post['_embedded']['wp:featuredmedia'][0]['source_url']) ? $post['_embedded']['wp:featuredmedia'][0]['source_url'] : '';
         $date_format = $args['format_date'];
 		
@@ -88,7 +97,7 @@ function api_articles_shortcode($atts) {
         $output .= '<li class="api-article">';
         $output .= '<article class="news-card">';
         $output .= '<div class="news-card__content-wrapper">';
-        $output .= "<$heading class='news-card__title'><a href='" . esc_url($post['link']) . "' class='news-card__link'>" . esc_html($post['title']['rendered']) . "</a></$heading>";
+        $output .= "<$heading class='news-card__title'><a href='" . esc_url($post['link']) . "' class='news-card__link'{$link_target}{$link_aria_label}>" . esc_html($post['title']['rendered']) . "</a></$heading>";
         $output .= '<div class="news-card__meta-wrapper">';
         if ($args['show_date'] == 'yes') {
             $output .= "<p class='news-card__date'><span>" . esc_html($date_published) . "</span></p>";

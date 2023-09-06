@@ -11,6 +11,11 @@ Added human readable time difference option (e.g., Published 3 days ago)
 
 ## Version 1.5
 Add option to receive a single post by slug
+
+## Version 1.6
+* Added Tags to the list of query options
+* Added an optional link_target option
+* Added custom link_aria_label
  ## Parameter
 
 * endpoint: Set the source (required)
