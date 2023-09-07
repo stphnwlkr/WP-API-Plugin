@@ -19,7 +19,8 @@ Add option to receive a single post by slug
 ## Version 1.7
 * Added cat_exclude to exclude categories
 * Added second shortcode to output a list of category names and IDs
-
+### version 1.7.1
+* Changed wp_remote_get to wp_safe_remote_get to improve security.
  ## Parameter
 
 * endpoint: Set the source (required)
