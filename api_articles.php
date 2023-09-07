@@ -57,9 +57,9 @@ function api_articles_shortcode($atts) {
     }
 
     if (!empty($args['post_slug'])) {
-        $response = wp_remote_get("{$args['endpoint']}/wp-json/wp/v2/{$args['post_type']}?_embed&slug={$args['post_slug']}");
+        $response = wp_safe_remote_get("{$args['endpoint']}/wp-json/wp/v2/{$args['post_type']}?_embed&slug={$args['post_slug']}");
     } else {
-        $response = wp_remote_get("{$args['endpoint']}/wp-json/wp/v2/{$args['post_type']}?_embed&per_page={$args['count']}&offset={$args['offset']}{$category_query}{$category_exclude_query}{$tag_query}");
+        $response = wp_safe_remote_get("{$args['endpoint']}/wp-json/wp/v2/{$args['post_type']}?_embed&per_page={$args['count']}&offset={$args['offset']}{$category_query}{$category_exclude_query}{$tag_query}");
     }
 
     if (is_wp_error($response)) {
@@ -142,7 +142,7 @@ function fetch_categories_from_endpoint($atts) {
     if (!$a['endpoint']) return 'No endpoint provided!';
 
     $paged = (get_query_var('paged')) ? absint(get_query_var('paged')) : 1;
-    $response = wp_remote_get($a['endpoint'] . '/wp-json/wp/v2/categories?per_page=100&page=' . $paged);
+    $response = wp_safe_remote_get($a['endpoint'] . '/wp-json/wp/v2/categories?per_page=100&page=' . $paged);
 
     if (is_wp_error($response)) return 'Error fetching categories.';
 
