@@ -1,10 +1,12 @@
 <?php
 /*
-Plugin Name: WP API Articles
-Description: Retrieves the latest articles from a specified WordPress API endpoint.
-Version: 1.8
-Website: https://github.com/stphnwlkr/WP-API-Plugin
-Author: Stephen Walker
+* Plugin Name: WP API Articles
+* Description: Retrieves the latest articles from a specified WordPress API endpoint.
+* Version: 1.8
+* Plugin URI: https://github.com/stphnwlkr/WP-API-Plugin
+* Requires at least: 6.0
+* Requires PHP:      8.0
+* Author: Stephen Walker
 */
 
 // Ensure the plugin is only executed within WordPress.
@@ -143,7 +145,7 @@ function fetch_categories_from_endpoint($atts) {
     if (!$a['endpoint']) return 'No endpoint provided!';
 
     $paged = (isset($_GET['catpaged']) && $_GET['catpaged'] > 0) ? absint($_GET['catpaged']) : 1;
-    $response = wp_safe_remote_get($a['endpoint'] . '/wp-json/wp/v2/categories?per_page=10&page=' . $paged);
+    $response = wp_safe_remote_get($a['endpoint'] . '/wp-json/wp/v2/categories?per_page=100&page=' . $paged);
 
     if (is_wp_error($response)) return 'Error fetching categories.';
 
