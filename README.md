@@ -19,8 +19,11 @@ Add option to receive a single post by slug
 ## Version 1.7
 * Added cat_exclude to exclude categories
 * Added second shortcode to output a list of category names and IDs
-### version 1.7.1
+### Version 1.7.1
 * Changed wp_remote_get to wp_safe_remote_get to improve security.
+## Version 1.8
+* Retrieve custom post types and slugs
+* Retrieve custom taxonomy names and slugs (this is of little benefit yet until functionality is addded to filter by custom taxonomy values)
  ## Parameter
 
 * endpoint: Set the source (required)
