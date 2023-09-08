@@ -2,7 +2,7 @@
 /*
 * Plugin Name: WP API Articles
 * Description: Retrieves the latest articles from a specified WordPress API endpoint.
-* Version: 1.8
+* Version: 1.9
 * Plugin URI: https://github.com/stphnwlkr/WP-API-Plugin
 * Requires at least: 6.0
 * Requires PHP:      8.0
@@ -35,6 +35,10 @@ function api_articles_shortcode($atts) {
         'post_slug' => '',
         'link_target' => '',  // e.g. '_blank' for a new tab
         'link_aria_label' => '',
+        'order_by' => 'date',  // default to order by date
+        'order_direction' => 'desc',  // default to descending order
+        'taxonomy_name' => '',  // empty by default, specify the taxonomy name
+        'taxonomy_value' => '',  // empty by default, specify the taxonomy value
     ), $atts);
 
     $args = array_map('sanitize_text_field', $args);
@@ -59,10 +63,17 @@ function api_articles_shortcode($atts) {
         $tag_query = "&tags={$args['tag']}";
     }
 
+    $order_query = "&orderby={$args['order_by']}&order={$args['order_direction']}";
+    
+    $taxonomy_query = '';
+    if (!empty($args['taxonomy_name']) && !empty($args['taxonomy_value'])) {
+        $taxonomy_query = "&{$args['taxonomy_name']}={$args['taxonomy_value']}"; 
+    }
+
     if (!empty($args['post_slug'])) {
         $response = wp_safe_remote_get("{$args['endpoint']}/wp-json/wp/v2/{$args['post_type']}?_embed&slug={$args['post_slug']}");
     } else {
-        $response = wp_safe_remote_get("{$args['endpoint']}/wp-json/wp/v2/{$args['post_type']}?_embed&per_page={$args['count']}&offset={$args['offset']}{$category_query}{$category_exclude_query}{$tag_query}");
+        $response = wp_safe_remote_get("{$args['endpoint']}/wp-json/wp/v2/{$args['post_type']}?_embed&per_page={$args['count']}&offset={$args['offset']}{$category_query}{$category_exclude_query}{$tag_query}{$order_query}{$taxonomy_query}");
     }
 
     if (is_wp_error($response)) {

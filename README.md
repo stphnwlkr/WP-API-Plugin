@@ -23,7 +23,11 @@ Add option to receive a single post by slug
 * Changed wp_remote_get to wp_safe_remote_get to improve security.
 ## Version 1.8
 * Retrieve custom post types and slugs
-* Retrieve custom taxonomy names and slugs (this is of little benefit yet until functionality is addded to filter by custom taxonomy values)
+* Retrieve custom taxonomy names and slugs
+## Version 1.9
+* add order by and order direction parameters
+* add custom taxonomy and custom taxonomy value parameter
+
  ## Parameter
 
 * endpoint: Set the source (required)
