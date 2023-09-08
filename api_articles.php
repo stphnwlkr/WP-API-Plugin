@@ -2,7 +2,8 @@
 /*
 Plugin Name: WP API Articles
 Description: Retrieves the latest articles from a specified WordPress API endpoint.
-Version: 1.7.1
+Version: 1.8
+Website: https://github.com/stphnwlkr/WP-API-Plugin
 Author: Stephen Walker
 */
 
