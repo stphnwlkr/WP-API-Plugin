@@ -28,6 +28,10 @@ Add option to receive a single post by slug
 * add order by and order direction parameters
 * add custom taxonomy and custom taxonomy value parameter
 * add shortcode to retrieve custom taxonomy terms based on custom taxonomy slug
+## Version 2.0
+* restructured the code
+* enqueued sample CSS for immediate use
+* included SCSS variation
 
  ## Parameter
 
