@@ -1,0 +1,140 @@
+// Variables
+$font-sans: var(--sans);  // Assuming you will provide the actual value or keep using CSS var
+$overlay-color: rgba(0, 0, 0, 0.6);
+$text-color: white;
+$standard-gap: 1rem;
+
+
+.post-cards-grid, .small-grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: $standard-gap;
+
+    & .api-article {
+        flex-direction: column;
+        overflow: hidden;
+        position: relative;
+        padding: 0;
+        min-height: 260px;
+        isolation: isolate;
+    }
+
+    & .news-card {
+        display: flex;
+        z-index: 1;
+        flex-wrap: nowrap;
+        flex-direction: column;
+        justify-content: flex-end;
+        height: 100%;
+    }
+
+    & .news-card__img-wrapper {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        margin: 0;
+    }
+
+    & .news-card__img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    & .news-card__content-wrapper {
+        background: $overlay-color;
+        color: $text-color;
+        padding: var(--space-s);
+        z-index: 1;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+
+    & .news-card__title {
+        margin: 0 0 10px;
+        font-size: var(--text-l);
+        font-family: $font-sans;
+        font-weight: 700;
+    }
+
+    & .news-card__link {
+        color: $text-color;
+        text-decoration: none;
+    }
+
+    & .news-card__meta-wrapper {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 0 10px;
+    }
+
+    @media(min-width: 991px) {
+        & {
+            grid-template-columns: repeat(12, 1fr);
+            grid-template-rows: 1fr 1fr;
+            gap: clamp($standard-gap, 0.446vw + 0.857rem, 1.5rem);
+        }
+
+        & li:first-of-type {
+            grid-area: 1 / 1 / 3 / 6;
+        }
+
+        & li:nth-of-type(2) {
+            grid-area: 1 / 6 / 3 /10;
+        }
+
+        & li:nth-of-type(3) {
+            grid-area: 1 / 10 / 1 / 13;
+        }
+
+        & li:nth-of-type(4) {
+            grid-area: 2 / 10 / 2 / 13;
+        }
+    }
+
+    @media(min-width: 767px) and (max-width: 991px) {
+        & {
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr;
+        }
+    }
+
+    @media(max-width: 767px) {
+        & {
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr;
+        }
+    }
+}
+
+.small-grid {
+    & .news-card {
+        gap: $standard-gap;
+        grid-template-columns: 1fr 3fr;
+    }
+
+    & .news-card__img-wrapper {
+        width: 75px;
+        height: 75px;
+        align-self: center;
+        grid-row: 1;
+    }
+
+    & .news-card__img {
+        aspect-ratio: 1/1;
+        border-radius: 99rem;
+    }
+
+    & .news-card__title {
+        font-size: var(--text-m);
+        font-weight: 600;
+    }
+}
+
+.news-card__date, .news-card__category, .news-card__excerpt {
+    margin: 0;
+}
