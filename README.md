@@ -32,7 +32,8 @@ Add option to receive a single post by slug
 * restructured the code
 * enqueued sample CSS for immediate use
 * included SCSS variation
-
+## Version 2.1
+* Add alt text
  ## Parameter
 
 * endpoint: Set the source (required)
