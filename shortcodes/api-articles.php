@@ -117,9 +117,9 @@ function api_articles_shortcode($atts) {
             $output .= "<p class='news-card__category'><span>" . esc_html($category) . "</span></p>";
         }
         $output .= '</div>';
-        if ($args['show_excerpt'] == 'yes') {
-            $output .= "<p class='news-card__excerpt'>" . wp_kses_post($post['excerpt']['rendered']) . "</p>";
-        }
+       if ($args['show_excerpt'] == 'yes' && isset($post['excerpt']['rendered']) && !empty($post['excerpt']['rendered'])) {
+    $output .= "<p class='news-card__excerpt'>" . wp_kses_post($post['excerpt']['rendered']) . "</p>";
+}
         $output .= '</div>';
         if ($args['show_img'] == 'yes') {
             $alt_text = isset($post['_embedded']['wp:featuredmedia'][0]['alt_text']) && !empty($post['_embedded']['wp:featuredmedia'][0]['alt_text']) 
